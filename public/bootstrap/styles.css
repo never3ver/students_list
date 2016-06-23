@@ -1,0 +1,29 @@
+.table {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 60px;
+}
+
+.column {
+    width: 10%;
+    text-align: center;
+}
+
+.column-wide {
+    width: 20%;
+    text-align: center;
+}
+
+.cell {
+    text-align: center;
+}
+
+.form {
+    position: relative;
+    top: 60px;
+}
+
+.textboldleft{
+    font-weight: bold;
+    text-align: left;
+}

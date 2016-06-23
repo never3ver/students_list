@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel='stylesheet' href='/bootstrap/css/bootstrap.min.css'
+              type='text/css' media='all'>
+        <link rel="stylesheet" href="/bootstrap/styles.css">
+        <link rel="stylesheet" href="../public/bootstrap/styles.css" type="text/css">
+
+
+        <meta charset="UTF-8">
+        <title>List of students</title>
+    </head>
+    <body>
+        <?php include __DIR__ . '/../templates/header.html';?>
+        <form class="form" action="regedit.php" method="post">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <td class="textboldleft">Имя</td><td>
+                        <input class="column-wide" type="text" name='name'
+                               value='<?=$row[1]?>' required="required">
+                    </td></tr>
+                <tr>
+                    <td class="textboldleft">Фамилия</td><td>
+                        <input class="column-wide" type="text" name='secondname'
+                               value='<?=$row[2]?>' required="required">
+                    </td></tr>
+                <tr><td class="textboldleft">Пол</td><td>
+                        <input class="column-wide" type="text" name = 'sex'
+                               value='<?=$row[3]?>' required="required">
+                    </td></tr>
+                <tr><td class="textboldleft">Номер группы</td><td>
+                        <input class="column-wide" type="text" name = 'group'
+                               value='<?=$row[4]?>' required="required">
+                    </td></tr>
+                <tr><td class="textboldleft">e-mail</td><td>
+                        <input class="column-wide" type="text" name = 'email'
+                               value='<?=$row[5]?>' required="required">
+                    </td></tr>
+                <tr><td class="textboldleft">Баллов</td><td>
+                        <input class="column-wide" type="text" name = 'score'
+                               value='<?=$row[6]?>' required="required">
+                    </td></tr>
+                <tr><td class="textboldleft">Год рождения</td><td>
+                        <input class="column-wide" type="text" name = 'birthyear'
+                               value='<?=$row[7]?>' required="required">
+                    </td></tr>
+                <tr><td class="textboldleft">Местный</td><td>
+                        <input class="column-wide" type="text" name = 'local'
+                               value='<?=$row[8]?>' required="required">
+                    </td></tr>
+            </table>
+            <input type="submit" value="Внести изменения" class="table btn btn-success">
+        </form>
+    </body>
+</html>
