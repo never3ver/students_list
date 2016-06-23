@@ -32,8 +32,7 @@ $gateway = new StudentsDataGateway($pdo);
             }
 
             $totalRecords = $gateway->countAllStudents(); //total entries in database
-            var_dump($totalRecords);
-            $recordsPerPage = 50; //quantity of records per page is defined here
+            $recordsPerPage = 50; //quantity of records per page is set here
             $pager = new Pager($totalRecords, $recordsPerPage, "index.php?page=");
             $limits = $pager->getLimitAndOffset($currentPage);
             
