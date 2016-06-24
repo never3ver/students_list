@@ -3,31 +3,31 @@
         <tr>
             <th class="column-wide">Имя <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'name', Helper::getOrder($order)), ENT_QUOTES) ?>"><?= $sort == 'name' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
             <th class="column-wide">Фамилия <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'secondName', Helper::getOrder($order)), ENT_QUOTES) ?>"><?= $sort == 'secondName' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
-            <th class="column">Номер группы <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'group', Helper::getOrder($order)), ENT_QUOTES) ?>"><?= $sort == 'secondName' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
-            <th class="column">Баллов <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'score', Helper::getOrder($order)), ENT_QUOTES) ?>"><?= $sort == 'secondName' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
+            <th class="column">Номер группы <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'group', Helper::getOrder($order)), ENT_QUOTES) ?>"><?= $sort == 'group' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
+            <th class="column">Баллов <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'score', Helper::getOrder($order)), ENT_QUOTES) ?>"><?= $sort == 'score' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
         </tr>
     </thead>
     <tbody>
-        <?php for ($i = 0; $i < $rows; ++ $i) :?>
-        <?php $row = $pageList->FETCH(PDO::FETCH_NUM);?>
+        <?php foreach ($pageList as $value): ?>
         <tr>
             <td class="cell">
-                <?php $row[1] = Helper::highlightText($search, $row[1]); ?>
-                <?= $row[1] ?>
+                <?php $value[1] = Helper::highlightText($search, $value[1]); ?>
+                <?= $value[1] ?>
             </td>
             <td class="cell">
-                <?php $row[2] = Helper::highlightText($search, $row[2]); ?>
-                <?= $row[2] ?>
+                <?php $value[2] = Helper::highlightText($search, $value[2]); ?>
+                <?= $value[2] ?>
             </td>
             <td class="cell">
-                <?php $row[4] = Helper::highlightText($search, $row[4]); ?>
-                <?= $row[4] ?>
+                <?php $value[4] = Helper::highlightText($search, $value[4]); ?>
+                <?= $value[4] ?>
             </td>
             <td class="cell">
-                <?php $row[6] = Helper::highlightText($search, $row[6]); ?>
-                <?= $row[6] ?>
+                <?php $value[6] = Helper::highlightText($search, $value[6]); ?>
+                <?= $value[6] ?>
             </td>
         </tr>
-        <?php endfor;?>
+
+        <?php endforeach;?>
     </tbody>
 </table>

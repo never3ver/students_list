@@ -17,13 +17,7 @@ $gateway = new StudentsDataGateway($pdo);
         <div class="container">
             <?php
             include __DIR__ . '/../templates/header.html';
-            if (!isset($_POST['search']) || $_POST['search'] === "") {
-                $search = "";
-            } else {
-                $search = strval($_POST['search']);
-                $search = trim($search);
-                $list = $gateway->searchStudents($search);
-            }
+
 
             if (!isset($_GET['page'])) {
                 $currentPage = 1;
@@ -35,7 +29,7 @@ $gateway = new StudentsDataGateway($pdo);
             $recordsPerPage = 50; //quantity of records per page is set here
             $pager = new Pager($totalRecords, $recordsPerPage, "index.php?page=");
             $limits = $pager->getLimitAndOffset($currentPage);
-            
+
             if (!isset($_GET['sort'])) {
                 $sort = "";
                 $order = "";
@@ -43,9 +37,15 @@ $gateway = new StudentsDataGateway($pdo);
                 $sort = strval($_GET['sort']);
                 $order = strval($_GET['order']);
             }
-            
-            $pageList = $gateway->getStudents($limits['limit'], $limits['offset'], $sort, $order);
-            $rows = $pageList->rowCount(); //quantity of records dislpayed on the page
+
+            if (!isset($_POST['search']) || $_POST['search'] === "") {
+                $search = "";
+                $pageList = $gateway->getStudents($limits['limit'], $limits['offset'], $sort, $order);
+            } else {
+                $search = strval($_POST['search']);
+                $search = trim($search);
+                $pageList = $gateway->searchStudents($search);
+            }
 
             include __DIR__ . '/../templates/listOfStudents.html';
             ?>
