@@ -50,12 +50,12 @@ $gateway = new StudentsDataGateway($pdo);
             include __DIR__ . '/../templates/listOfStudents.html';
             ?>
             <?php if (!isset($_COOKIE['name'])): ?>
-                <form action="register.php">
+                <form action="regedit.php">
                     <button type="submit" class="table btn btn-success">
                         Зарегистрироваться</button>
                 </form>
             <?php else: ?>
-                <form action="edit.php">
+                <form action="regedit.php">
                     <button type="submit" class="table btn btn-success">
                         Редактировать</button>
                 </form>
