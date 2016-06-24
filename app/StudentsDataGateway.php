@@ -27,7 +27,7 @@ class StudentsDataGateway {
         //$pdoStatement = $this->pdo->prepare("SELECT * FROM students WHERE `name` LIKE :search OR `secondname` LIKE :search OR `group` LIKE :search");
         $pdoStatement->bindValue(":search", "%" . $search . "%");
         $pdoStatement->execute();
-        $students = $pdoStatement->fetchAll(PDO::FETCH_NUM);
+        $students = $pdoStatement->fetchAll();
         return $students;
     }
 
@@ -83,7 +83,7 @@ class StudentsDataGateway {
         $pdoStatement->bindValue(":limit", intval($limit, 10), PDO::PARAM_INT);
         $pdoStatement->bindValue(":offset", intval($offset, 10), PDO::PARAM_INT);
         $pdoStatement->execute();
-        $students = $pdoStatement->fetchAll(PDO::FETCH_NUM);
+        $students = $pdoStatement->fetchAll();
         return $students;
     }
 

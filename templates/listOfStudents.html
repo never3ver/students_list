@@ -11,20 +11,20 @@
         <?php foreach ($pageList as $value): ?>
         <tr>
             <td class="cell">
-                <?php $value[1] = Helper::highlightText($search, $value[1]); ?>
-                <?= $value[1] ?>
+                <?php $value['name'] = Helper::highlightText($search, $value['name']); ?>
+                <?= $value['name'] ?>
             </td>
             <td class="cell">
-                <?php $value[2] = Helper::highlightText($search, $value[2]); ?>
-                <?= $value[2] ?>
+                <?php $value['secondname'] = Helper::highlightText($search, $value['secondname']); ?>
+                <?= $value['secondname'] ?>
             </td>
             <td class="cell">
-                <?php $value[4] = Helper::highlightText($search, $value[4]); ?>
-                <?= $value[4] ?>
+                <?php $value['group'] = Helper::highlightText($search, $value['group']); ?>
+                <?= $value['group'] ?>
             </td>
             <td class="cell">
-                <?php $value[6] = Helper::highlightText($search, $value[6]); ?>
-                <?= $value[6] ?>
+                <?php $value['score'] = Helper::highlightText($search, $value['score']); ?>
+                <?= $value['score'] ?>
             </td>
         </tr>
 
