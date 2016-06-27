@@ -2,8 +2,8 @@
     <thead>
         <tr>
             <th class="column-wide">Имя <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'name', Helper::getOrder($order)), ENT_QUOTES) ?>"><?= $sort == 'name' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
-            <th class="column-wide">Фамилия <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'secondName', Helper::getOrder($order)), ENT_QUOTES) ?>"><?= $sort == 'secondName' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
-            <th class="column">Номер группы <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'group', Helper::getOrder($order)), ENT_QUOTES) ?>"><?= $sort == 'group' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
+            <th class="column-wide">Фамилия <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'secondname', Helper::getOrder($order)), ENT_QUOTES) ?>"><?= $sort == 'secondname' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
+            <th class="column">Номер группы <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'groupname', Helper::getOrder($order)), ENT_QUOTES) ?>"><?= $sort == 'groupname' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
             <th class="column">Баллов <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'score', Helper::getOrder($order)), ENT_QUOTES) ?>"><?= $sort == 'score' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
         </tr>
     </thead>
@@ -19,7 +19,7 @@
                 <?= $value['secondname'] ?>
             </td>
             <td class="cell">
-                <?php $value['group'] = Helper::highlightText($search, $value['group']); ?>
+                <?php $value['group'] = Helper::highlightText($search, $value['groupname']); ?>
                 <?= $value['group'] ?>
             </td>
             <td class="cell">

@@ -6,7 +6,7 @@ class Student {
     public $name;
     public $secondName;
     public $sex;
-    public $group;
+    public $groupName;
     public $email;
     public $score;
     public $birthYear;

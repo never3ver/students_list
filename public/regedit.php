@@ -18,7 +18,7 @@ if (isset($_POST['name']) && isset($_POST['secondname']) && isset($_POST['sex'])
     $student->name = strval($_POST['name']);
     $student->secondName = strval($_POST['secondname']);
     $student->sex = strval($_POST['sex']);
-    $student->group = strval($_POST['group']);
+    $student->group = strval($_POST['groupname']);
     $student->email = strval($_POST['email']);
     $student->score = strval($_POST['score']);
     $student->birthYear = strval($_POST['birthyear']);

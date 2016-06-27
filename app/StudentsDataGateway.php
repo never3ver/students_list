@@ -13,7 +13,7 @@ class StudentsDataGateway {
         $pdoStatement->bindValue(":name", $student->name);
         $pdoStatement->bindValue(":secondname", $student->secondName);
         $pdoStatement->bindValue(":sex", $student->sex);
-        $pdoStatement->bindValue(":group", $student->group);
+        $pdoStatement->bindValue(":groupname", $student->group);
         $pdoStatement->bindValue(":email", $student->email);
         $pdoStatement->bindValue(":score", $student->score);
         $pdoStatement->bindValue(":birthyear", $student->birthYear);
@@ -23,8 +23,8 @@ class StudentsDataGateway {
     }
 
     public function searchStudents($search) {
-        $pdoStatement = $this->pdo->prepare("SELECT * FROM students WHERE CONCAT(`name`, ' ', `secondname`, ' ', `group`) LIKE :search");
-        //$pdoStatement = $this->pdo->prepare("SELECT * FROM students WHERE `name` LIKE :search OR `secondname` LIKE :search OR `group` LIKE :search");
+        $pdoStatement = $this->pdo->prepare("SELECT * FROM students WHERE CONCAT(`name`, ' ', `secondname`, ' ', `groupname`) LIKE :search");
+        //$pdoStatement = $this->pdo->prepare("SELECT * FROM students WHERE `name` LIKE :search OR `secondname` LIKE :search OR `groupname` LIKE :search");
         $pdoStatement->bindValue(":search", "%" . $search . "%");
         $pdoStatement->execute();
         $students = $pdoStatement->fetchAll();
@@ -45,11 +45,11 @@ class StudentsDataGateway {
     }
 
     public function updateStudent(Student $student) {
-        $pdoStatement = $this->pdo->prepare("UPDATE students SET `name` = :name, `secondname` = :secondname, `sex` = :sex, `group` = :group, `email` = :email, `score` = :score, `birthyear` = :birthyear, `local` = :local WHERE `id` = :id");
+        $pdoStatement = $this->pdo->prepare("UPDATE students SET `name` = :name, `secondname` = :secondname, `sex` = :sex, `groupname` = :groupname, `email` = :email, `score` = :score, `birthyear` = :birthyear, `local` = :local WHERE `id` = :id");
         $pdoStatement->bindValue(":name", $student->name);
         $pdoStatement->bindValue(":secondname", $student->secondName);
         $pdoStatement->bindValue(":sex", $student->sex);
-        $pdoStatement->bindValue(":group", $student->group);
+        $pdoStatement->bindValue(":groupname", $student->groupName);
         $pdoStatement->bindValue(":email", $student->email);
         $pdoStatement->bindValue(":score", $student->score);
         $pdoStatement->bindValue(":birthyear", $student->birthYear);
@@ -70,7 +70,7 @@ class StudentsDataGateway {
 
     public function getStudents($limit, $offset, $sort, $order) {
 //        checking if $sort is acceptable
-        $fields = ["name", "secondName", "group", "score"];
+        $fields = ["name", "secondname", "groupname", "score"];
         $key = array_search($sort, $fields);
         $sort = $fields[$key];
 //      checking if $order is acceptable
