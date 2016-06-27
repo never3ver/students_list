@@ -13,7 +13,7 @@ class StudentsDataGateway {
         $pdoStatement->bindValue(":name", $student->name);
         $pdoStatement->bindValue(":secondname", $student->secondName);
         $pdoStatement->bindValue(":sex", $student->sex);
-        $pdoStatement->bindValue(":groupname", $student->group);
+        $pdoStatement->bindValue(":groupname", $student->groupName);
         $pdoStatement->bindValue(":email", $student->email);
         $pdoStatement->bindValue(":score", $student->score);
         $pdoStatement->bindValue(":birthyear", $student->birthYear);
