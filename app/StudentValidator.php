@@ -16,7 +16,7 @@ class StudentValidator
         if (! preg_match("/M|F/", $student->sex)) {
             $errors['sex'] = "Пол может обозначаться только латинскими символами M или F";
         }
-        if (! preg_match("/[-А-ЯЁа-яёa-zA-Z0-9]{1,10}/u", $student->group)) {
+        if (! preg_match("/[-А-ЯЁа-яёa-zA-Z0-9]{1,10}/u", $student->groupName)) {
             $errors['group'] = "Имя группы может содержать не более 10 латинских либо кириллических символов, цифр, дефисов";
         }
         if (! preg_match("/([a-zA-Z0-9_+.-]+)@([a-z.-]+)/ui", $student->email)) {
