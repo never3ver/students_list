@@ -1,0 +1,12 @@
+<?php require_once __DIR__ . '/../templates/header.html' ?>
+<?php require_once __DIR__ . '/../templates/listOfStudents.html' ?>
+
+<?php if (!isset($_COOKIE['name'])): ?>
+<?php include __DIR__ . '/../templates/registerButton.html'; ?>
+<?php else: ?>
+<?php include __DIR__ . '/../templates/editButton.html'; ?>
+<?php endif; ?>
+
+<?php if ($totalRecords > $recordsPerPage): ?> 
+<?php include __DIR__ . '/../templates/pagination.html' ?>
+<?php endif; ?>

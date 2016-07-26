@@ -24,10 +24,11 @@ class Pager {
         return $this->template . $pageNumber;
     }
 
-    public function getSortedLinkForPage($pageNumber, $sort, $order) {
+    public function getSortedLinkForPage($pageNumber, $sort, $order, $search) {
         $link = $this->getLinkForPage($pageNumber) . "&" . http_build_query([
                     'sort' => $sort,
-                    'order' => $order
+                    'order' => $order,
+                    'search' => $search
         ]);
         return $link;
     }
@@ -38,10 +39,12 @@ class Pager {
 
     //Get LIMIT and OFFSET for StudentsDataGateway 
     //function getStudents()
-    public function getLimitAndOffset($pageNumber) {
-        $arguments['limit'] = $this->recordsPerPage;
-        $arguments['offset'] = $pageNumber * $this->recordsPerPage - $this->recordsPerPage;
-        return $arguments;
+    public function getLimit($pageNumber) {
+        return $this->recordsPerPage;
+    }
+
+    public function getOffset($pageNumber) {
+        return $pageNumber * $this->recordsPerPage - $this->recordsPerPage;
     }
 
 }

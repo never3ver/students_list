@@ -1,16 +1,21 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="index.php">Список студентов</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <form class="navbar-form navbar-right" action="index.php" method="post">
-                <div class="form-group">
-                    <input type="text" name="search" placeholder="Поиск" class="form-control">
+<!DOCTYPE html>
+<html>
+    <?php include __DIR__ . '/../templates/head.html'; ?>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="index.php">Список студентов</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <form class="navbar-form navbar-right" action="index.php" method="get">
+                            <div class="form-group">
+                                <input type="text" name="search" placeholder="Поиск" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-success">Найти</button>
+                        </form>
+                    </div>
+                    <!--/.navbar-collapse -->
                 </div>
-                <button type="submit" class="btn btn-success">Найти</button>
-            </form>
-        </div>
-        <!--/.navbar-collapse -->
-    </div>
-</nav>
+            </nav>

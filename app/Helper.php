@@ -14,8 +14,13 @@ class Helper {
     }
 
     public static function highlightText($word, $text) {
-        $text = preg_replace("/$word/ui", '<span style="background:yellow">' . $word . '</span>', $text);
-        return $text;
+        if (!$word) {
+            return $text;
+        } else {
+            $word = htmlspecialchars($word);
+            $text = preg_replace("/$word/ui", '<mark>' . $word . '</mark>', $text);
+            return $text;
+        }
     }
 
     public static function getOrder($order) {
@@ -31,7 +36,7 @@ class Helper {
             return '&dArr;';
         } elseif ($order == 'DESC') {
             return '&uArr;';
-        } elseif ($order == ''){
+        } elseif ($order == '') {
             return '&#8661;';
         }
     }

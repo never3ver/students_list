@@ -27,14 +27,15 @@ CREATE TABLE `students` (
   `name` varchar(45) NOT NULL,
   `secondname` varchar(45) NOT NULL,
   `sex` enum('M','F') NOT NULL,
-  `group` varchar(10) NOT NULL,
+  `groupname` varchar(10) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `score` int(11) NOT NULL,
-  `birthyear` int(4) NOT NULL,
+  `score` int(3) NOT NULL,
+  `birthyear` year(4) NOT NULL,
   `local` enum('Y','N') NOT NULL,
-  `cookie` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `cookie` varchar(45) DEFAULT NULL COMMENT 'cookie of user',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -46,4 +47,4 @@ CREATE TABLE `students` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-24 12:15:17
+-- Dump completed on 2016-07-13 17:24:04
