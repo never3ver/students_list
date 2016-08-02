@@ -29,7 +29,7 @@ if (!isset($_GET['search']) || $_GET['search'] === "") {
     $search = strval($_GET['search']);
     $search = trim($search);
 }
-
+//list of students to display
 $pageList = $gateway->getStudents($search, $limit, $offset, $sort, $order);
 
 include __DIR__ . '/../templates/index.html';

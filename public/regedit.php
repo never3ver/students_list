@@ -4,33 +4,38 @@ require_once __DIR__ . '/../app/init.php';
 
 $student = new Student();
 $gateway = new StudentsDataGateway($pdo);
-$authorizer = new Authorization($gateway);
+$validator = new StudentValidator($gateway);
+$oldEmail = "";
 
 if (isset($_COOKIE['name'])) {
     $student = $gateway->getStudent($_COOKIE['name']);
+    $oldEmail = $student->email;
 }
-
 if (!empty($_POST)) {
-    $student->name = trim(strval($_POST['name']));
-    $student->secondName = trim(strval($_POST['secondName']));
-    strval($_POST['sex']) == "M" ? $student->sex = "M" : $student->sex = "F";
-    $student->groupName = trim(strval($_POST['groupName']));
-    $student->email = trim(strval($_POST['email']));
-    $student->score = trim(strval($_POST['score']));
-    $student->birthYear = trim(strval($_POST['birthYear']));
-    strval($_POST['local']) === "Y" ? $student->local = "Y" : $student->local = "N";
-}
+    $arrayOfProperties = [
+        "name",
+        "secondName",
+        "sex",
+        "groupName",
+        "email",
+        "score",
+        "birthYear",
+        "local"
+    ];
+//    filling $student with $_POST contents
+    foreach ($arrayOfProperties as $value) {
+        if (!empty($_POST[$value])) {
+            $student->$value = trim(strval($_POST[$value]));
+        }
+    }
 
-$validator = new StudentValidator($gateway);
+    $errors = $validator->validate($student, $oldEmail);
 
-if (isset($_COOKIE['name'])) {
-    if (!empty($_POST)) {
+    if (isset($_COOKIE['name'])) {
         $gateway->updateStudent($student);
         header("Refresh: 0; url = index.php");
         require_once __DIR__ . '/../templates/ok.html';
-    }
-} else {
-    if (!empty($_POST)) {
+    } else {
         $student = new Student();
         $cookie = Helper::generateCookie();
         $student->cookie = $cookie;

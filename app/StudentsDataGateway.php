@@ -52,24 +52,12 @@ class StudentsDataGateway {
         $pdoStatement->execute();
     }
 
-    /*public function isStudentRegistered($cookie) {
-        $pdoStatement = $this->pdo->prepare("SELECT COUNT(*) FROM students WHERE cookie = :cookie");
-        $pdoStatement->bindValue(":cookie", $cookie);
-        $pdoStatement->execute();
-        $result = $pdoStatement->fetchColumn();
-        if ($result>0) {
-            return TRUE;
-        } else {
-            return FALSE;
-        }
-    }*/
-
     public function isEmailUnique($email) {
         $pdoStatement = $this->pdo->prepare("SELECT COUNT(*) FROM students WHERE email = :email");
         $pdoStatement->bindValue(":email", $email);
         $pdoStatement->execute();
         $result = $pdoStatement->fetchColumn();
-        if ($result>0) {
+        if ($result > 0) {
             return TRUE;
         } else {
             return FALSE;
