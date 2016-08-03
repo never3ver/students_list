@@ -58,9 +58,9 @@ class StudentsDataGateway {
         $pdoStatement->execute();
         $result = $pdoStatement->fetchColumn();
         if ($result > 0) {
-            return TRUE;
-        } else {
             return FALSE;
+        } else {
+            return TRUE;
         }
     }
 

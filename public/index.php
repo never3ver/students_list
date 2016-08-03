@@ -8,9 +8,10 @@ if (!isset($_GET['page'])) {
 } else {
     $currentPage = intval($_GET['page']);
 }
-
-$totalRecords = $gateway->countAllStudents(); //total entries in database
-$recordsPerPage = 50; //quantity of records per page is set here
+//total entries in database
+$totalRecords = $gateway->countAllStudents();
+//quantity of records per page is set here
+$recordsPerPage = 50;
 $pager = new Pager($totalRecords, $recordsPerPage, "index.php?page=");
 $limit = $pager->getLimit($currentPage);
 $offset = $pager->getOffset($currentPage);
@@ -26,8 +27,7 @@ if (!isset($_GET['sort'])) {
 if (!isset($_GET['search']) || $_GET['search'] === "") {
     $search = "";
 } else {
-    $search = strval($_GET['search']);
-    $search = trim($search);
+    $search = trim(strval($_GET['search']));
 }
 //list of students to display
 $pageList = $gateway->getStudents($search, $limit, $offset, $sort, $order);

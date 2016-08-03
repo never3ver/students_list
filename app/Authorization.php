@@ -4,19 +4,32 @@ class Authorization {
 
     protected $gateway;
 
-    public function __construct($gateway) {
+    public function __construct(StudentsDataGateway $gateway) {
         $this->gateway = $gateway;
     }
 
     public function isAuthorized($cookie) {
         $result = $this->gateway->getStudent($cookie);
         if (is_object($result)) {
-//            var_dump($result);
             return TRUE;
         } else {
-//            var_dump($result);
             return FALSE;
         }
     }
-
+    
+    protected function generateCookie() {
+        $result = null;
+        $source = str_split('abcdefghijklmnopqrstuvwxyz'
+                . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+                . '0123456789');
+        for ($i = 0; $i < 45; $i++) {
+            $result .= $source[mt_rand(0, count($source) - 1)];
+        }
+        return $result;
+    }
+    
+    public function logIn(Student $student){
+        $student->cookie = $this->generateCookie();
+        setcookie('name', $student->cookie, time() + 60 * 60 * 24 * 365 * 10, '/', null, false, true);
+    }
 }

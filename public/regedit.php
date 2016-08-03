@@ -6,11 +6,15 @@ $student = new Student();
 $gateway = new StudentsDataGateway($pdo);
 $validator = new StudentValidator($gateway);
 $oldEmail = "";
+$authorizer = new Authorization($gateway);
 
 if (isset($_COOKIE['name'])) {
-    $student = $gateway->getStudent($_COOKIE['name']);
-    $oldEmail = $student->email;
+    if ($authorizer->isAuthorized($_COOKIE['name'])) {
+        $student = $gateway->getStudent($_COOKIE['name']);
+        $oldEmail = $student->email;
+    }
 }
+
 if (!empty($_POST)) {
     $arrayOfProperties = [
         "name",
@@ -30,19 +34,17 @@ if (!empty($_POST)) {
     }
 
     $errors = $validator->validate($student, $oldEmail);
-
-    if (isset($_COOKIE['name'])) {
-        $gateway->updateStudent($student);
-        header("Refresh: 0; url = index.php");
-        require_once __DIR__ . '/../templates/ok.html';
-    } else {
-        $student = new Student();
-        $cookie = Helper::generateCookie();
-        $student->cookie = $cookie;
-        setcookie('name', $cookie, time() + 60 * 60 * 24 * 365 * 10, '/', null, false, true);
-        $gateway->addStudent($student);
-        header("Refresh: 0; url = index.php");
-        require_once __DIR__ . '/../templates/ok.html';
+    if (empty($errors)) {
+        if (isset($_COOKIE['name']) && $authorizer->isAuthorized($_COOKIE['name'])) {
+            $gateway->updateStudent($student);
+            header("Refresh: 0; url = index.php");
+            require_once __DIR__ . '/../templates/ok.html';
+        } else {
+            $authorizer->logIn($student);
+            $gateway->addStudent($student);
+            header("Refresh: 0; url = index.php");
+            require_once __DIR__ . '/../templates/ok.html';
+        }
     }
 }
 require_once __DIR__ . '/../templates/editForm.html';
