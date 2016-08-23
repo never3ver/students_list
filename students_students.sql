@@ -30,11 +30,12 @@ CREATE TABLE `students` (
   `groupName` varchar(10) NOT NULL,
   `email` varchar(45) NOT NULL,
   `score` int(3) NOT NULL,
-  `birthYear` varchar(45) NOT NULL,
+  `birthYear` year(4) NOT NULL,
   `local` enum('Y','N') NOT NULL,
   `cookie` varchar(45) DEFAULT NULL COMMENT 'cookie of user',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  UNIQUE KEY `cookie_UNIQUE` (`cookie`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -47,5 +48,4 @@ CREATE TABLE `students` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-23  7:38:24
-
+-- Dump completed on 2016-08-23  8:00:48
