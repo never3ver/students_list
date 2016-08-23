@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.30, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.31, for Linux (x86_64)
 --
 -- Host: localhost    Database: students
 -- ------------------------------------------------------
--- Server version	5.6.30-log
+-- Server version	5.6.31-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,17 +25,17 @@ DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `secondname` varchar(45) NOT NULL,
+  `secondName` varchar(45) NOT NULL,
   `sex` enum('M','F') NOT NULL,
-  `groupname` varchar(10) NOT NULL,
+  `groupName` varchar(10) NOT NULL,
   `email` varchar(45) NOT NULL,
   `score` int(3) NOT NULL,
-  `birthyear` year(4) NOT NULL,
+  `birthYear` varchar(45) NOT NULL,
   `local` enum('Y','N') NOT NULL,
   `cookie` varchar(45) DEFAULT NULL COMMENT 'cookie of user',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -47,4 +47,5 @@ CREATE TABLE `students` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-13 17:24:04
+-- Dump completed on 2016-08-23  7:38:24
+
