@@ -34,7 +34,8 @@ CREATE TABLE `students` (
   `local` enum('Y','N') NOT NULL,
   `cookie` varchar(45) DEFAULT NULL COMMENT 'cookie of user',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  UNIQUE KEY `cookie_UNIQUE` (`cookie`),
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
