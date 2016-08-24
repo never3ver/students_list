@@ -6,7 +6,7 @@
 <?php include __DIR__ . '/parts/okEdited.html'; ?>
 <?php endif; ?>
 
-<?php require_once __DIR__ . '/listOfStudents.html' ?>
+<?php require_once __DIR__ . '/parts/listOfStudents.html' ?>
 
 <?php if (!$authorizer->isAuthorized()): ?>
 <?php include __DIR__ . '/parts/registerButton.html'; ?>
@@ -15,6 +15,6 @@
 <?php endif; ?>
 
 <?php if ($totalRecords > $recordsPerPage): ?> 
-<?php include __DIR__ . '/pagination.html' ?>
+<?php include __DIR__ . '/parts/pagination.html' ?>
 <?php endif; ?>
 <?php require_once __DIR__ . '/parts/footer.html' ?>
