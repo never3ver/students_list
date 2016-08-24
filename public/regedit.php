@@ -4,7 +4,6 @@ require_once __DIR__ . '/../app/init.php';
 
 $student = new Student();
 $validator = new StudentValidator($gateway);
-$oldEmail = "";
 
 if ($authorizer->isAuthorized()) {
     $student = $authorizer->retrieveStudent();
