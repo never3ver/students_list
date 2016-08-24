@@ -8,7 +8,6 @@ $oldEmail = "";
 
 if ($authorizer->isAuthorized()) {
     $student = $authorizer->retrieveStudent();
-    $oldEmail = $student->email;
 }
 
 if (!empty($_POST)) {
