@@ -9,7 +9,10 @@ class StudentsDataGateway {
     }
 
     public function addStudent(Student $student) {
-        $pdoStatement = $this->pdo->prepare("INSERT INTO students (`name`, `secondName`, `sex`, `groupName`, `email`, `score`, `birthYear`, `local`, `cookie`) VALUES (:name, :secondName, :sex, :groupName, :email, :score, :birthYear, :local, :cookie)");
+        $pdoStatement = $this->pdo->prepare("INSERT INTO students (`name`, "
+                . "`secondName`, `sex`, `groupName`, `email`, `score`, "
+                . "`birthYear`, `local`, `cookie`) VALUES (:name, :secondName,"
+                . " :sex, :groupName, :email, :score, :birthYear, :local, :cookie)");
         $pdoStatement->bindValue(":name", $student->name);
         $pdoStatement->bindValue(":secondName", $student->secondName);
         $pdoStatement->bindValue(":sex", $student->sex);
@@ -39,7 +42,10 @@ class StudentsDataGateway {
     }
 
     public function updateStudent(Student $student) {
-        $pdoStatement = $this->pdo->prepare("UPDATE students SET `name` = :name, `secondName` = :secondName, `sex` = :sex, `groupName` = :groupName, `email` = :email, `score` = :score, `birthYear` = :birthYear, `local` = :local WHERE `id` = :id");
+        $pdoStatement = $this->pdo->prepare("UPDATE students SET `name` = :name,"
+                . " `secondName` = :secondName, `sex` = :sex, `groupName` = :groupName,"
+                . " `email` = :email, `score` = :score, `birthYear` = :birthYear,"
+                . " `local` = :local WHERE `id` = :id");
         $pdoStatement->bindValue(":name", $student->name);
         $pdoStatement->bindValue(":secondName", $student->secondName);
         $pdoStatement->bindValue(":sex", $student->sex);
@@ -52,9 +58,10 @@ class StudentsDataGateway {
         $pdoStatement->execute();
     }
 
-    public function isEmailUnique($email) {
-        $pdoStatement = $this->pdo->prepare("SELECT COUNT(*) FROM students WHERE email = :email");
+    public function isEmailUnique($email, $id) {
+        $pdoStatement = $this->pdo->prepare("SELECT COUNT(*) FROM students WHERE email = :email AND id != :id");
         $pdoStatement->bindValue(":email", $email);
+        $pdoStatement->bindValue(":id", $id);
         $pdoStatement->execute();
         $result = $pdoStatement->fetchColumn();
         if ($result > 0) {
@@ -74,15 +81,34 @@ class StudentsDataGateway {
         $key = array_search($order, $directions);
         $order = $directions[$key];
 
-        $sql = "SELECT * FROM students WHERE CONCAT(`name`, ' ', `secondName`, ' ', `groupName`) LIKE :search ORDER BY $sort $order LIMIT :limit OFFSET :offset";
-        $pdoStatement = $this->pdo->prepare($sql);
-        $pdoStatement->bindValue(":search", "%" . $search . "%");
+        if ($search == "") {
+            $sql = "SELECT * FROM students ORDER BY $sort $order LIMIT :limit OFFSET :offset";
+            $pdoStatement = $this->pdo->prepare($sql);
+        } else {
+            $sql = "SELECT * FROM students WHERE CONCAT(`name`, ' ', `secondName`,"
+                    . " ' ', `groupName`) LIKE :search ORDER BY $sort $order LIMIT :limit OFFSET :offset";
+            $pdoStatement = $this->pdo->prepare($sql);
+            $pdoStatement->bindValue(":search", "%" . $search . "%");
+        }
+
         $pdoStatement->bindValue(":limit", intval($limit, 10), PDO::PARAM_INT);
         $pdoStatement->bindValue(":offset", intval($offset, 10), PDO::PARAM_INT);
         $pdoStatement->execute();
         $pdoStatement->setFetchMode(PDO::FETCH_CLASS, 'Student');
         $students = $pdoStatement->fetchAll();
         return $students;
+    }
+
+    public function isAbiturientExisting($cookie) {
+        $sql = "SELECT COUNT(*) FROM students WHERE cookie = :cookie";
+        $pdoStatement = $this->pdo->prepare($sql);
+        $pdoStatement->bindValue(":cookie", $cookie);
+        $pdoStatement->execute();
+        $result = $pdoStatement->fetchColumn();
+        if ($result > 0) {
+            return TRUE;
+        }
+        return FALSE;
     }
 
 }

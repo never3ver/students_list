@@ -3,18 +3,25 @@
 class Authorization {
 
     protected $gateway;
+    protected $cookie;
 
-    public function __construct(StudentsDataGateway $gateway) {
+    public function __construct(StudentsDataGateway $gateway, $cookie) {
         $this->gateway = $gateway;
+        $this->cookie = trim(strval($cookie));
     }
 
-    public function isAuthorized($cookie) {
-        $result = $this->gateway->getStudent($cookie);
-        if (is_object($result)) {
+    public function isAuthorized() {
+        if ($this->cookie == "") {
+            return FALSE;
+        } elseif ($this->gateway->isAbiturientExisting($this->cookie)) {
             return TRUE;
         } else {
             return FALSE;
         }
+    }
+
+    public function retrieveStudent(){
+        return $this->gateway->getStudent($this->cookie);
     }
     
     protected function generateCookie() {
@@ -27,9 +34,10 @@ class Authorization {
         }
         return $result;
     }
-    
-    public function logIn(Student $student){
+
+    public function logIn(Student $student) {
         $student->cookie = $this->generateCookie();
         setcookie('name', $student->cookie, time() + 60 * 60 * 24 * 365 * 10, '/', null, false, true);
     }
+
 }

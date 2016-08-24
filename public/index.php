@@ -1,13 +1,19 @@
 <?php
 
 require_once __DIR__ . '/../app/init.php';
-$gateway = new StudentsDataGateway($pdo);
 
 if (!isset($_GET['page'])) {
     $currentPage = 1;
 } else {
     $currentPage = intval($_GET['page']);
 }
+
+if (isset($_GET['notify'])) {
+    $notify = trim(strval($_GET['notify']));
+} else {
+    $notify = "";
+}
+
 //total entries in database
 $totalRecords = $gateway->countAllStudents();
 //quantity of records per page is set here
@@ -33,4 +39,3 @@ if (!isset($_GET['search']) || $_GET['search'] === "") {
 $pageList = $gateway->getStudents($search, $limit, $offset, $sort, $order);
 
 include __DIR__ . '/../templates/index.html';
-include __DIR__ . '/../templates/footer.html';

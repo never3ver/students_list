@@ -6,7 +6,7 @@
             <?php if ($currentPage == 1): ?>
             <li class="disabled"><span><<</span></li>
             <?php else: ?>
-            <li><a href="<?= $pager->getLinkForPage($currentPage - 1) ?>"><<</a></li>
+            <li><a href="<?= $pager->getSortedLinkForPage($currentPage - 1, $sort, $order, $search) ?>"><<</a></li>
             <?php endif; ?>
 
             <!--for numbered buttons-->
@@ -19,10 +19,10 @@
             <li class="active"><span><?= $pager->getTotalPages() ?></span></li>
             
             <?php elseif ($i == $currentPage): ?>
-            <li class="active"><a href="<?= $pager->getLinkForPage($i) ?>"><?= $i ?></a></li>
+            <li class="active"><a href="<?= $pager->getSortedLinkForPage($i, $sort, $order, $search) ?>"><?= $i ?></a></li>
             
             <?php else: ?>
-            <li><a href="<?= $pager->getLinkForPage($i) ?>"><?= $i ?></a></li>
+            <li><a href="<?= $pager->getSortedLinkForPage($i, $sort, $order, $search) ?>"><?= $i ?></a></li>
             <?php endif; ?>            
             
             <?php endfor; ?>
@@ -31,7 +31,7 @@
             <?php if ($currentPage == $pager->getTotalPages()): ?>
             <li class="disabled"><span>>></span></li>
             <?php else: ?>
-            <li><a href="<?= $pager->getLinkForPage($currentPage + 1) ?>">>></a></li>
+            <li><a href="<?= $pager->getSortedLinkForPage($currentPage + 1, $sort, $order, $search) ?>">>></a></li>
             <?php endif; ?>
 
         </ul>

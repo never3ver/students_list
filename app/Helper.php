@@ -4,8 +4,9 @@ class Helper {
 
     public static function highlightText($word, $text) {
         if (!$word) {
-            return $text;
+            return htmlspecialchars($text);
         } else {
+            $word = preg_quote($word);
             $word = htmlspecialchars($word, ENT_QUOTES);
             $text = htmlspecialchars($text, ENT_QUOTES);
             $text = preg_replace("/$word/ui", '<mark>' . $word . '</mark>', $text);

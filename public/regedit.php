@@ -3,16 +3,12 @@
 require_once __DIR__ . '/../app/init.php';
 
 $student = new Student();
-$gateway = new StudentsDataGateway($pdo);
 $validator = new StudentValidator($gateway);
 $oldEmail = "";
-$authorizer = new Authorization($gateway);
 
-if (isset($_COOKIE['name'])) {
-    if ($authorizer->isAuthorized($_COOKIE['name'])) {
-        $student = $gateway->getStudent($_COOKIE['name']);
-        $oldEmail = $student->email;
-    }
+if ($authorizer->isAuthorized()) {
+    $student = $authorizer->retrieveStudent();
+    $oldEmail = $student->email;
 }
 
 if (!empty($_POST)) {
@@ -35,15 +31,13 @@ if (!empty($_POST)) {
 
     $errors = $validator->validate($student, $oldEmail);
     if (empty($errors)) {
-        if (isset($_COOKIE['name']) && $authorizer->isAuthorized($_COOKIE['name'])) {
+        if ($authorizer->isAuthorized()) {
             $gateway->updateStudent($student);
-            header("Refresh: 0; url = index.php");
-            require_once __DIR__ . '/../templates/ok.html';
+            header("Location: index.php?notify=edited");
         } else {
             $authorizer->logIn($student);
             $gateway->addStudent($student);
-            header("Refresh: 0; url = index.php");
-            require_once __DIR__ . '/../templates/ok.html';
+            header("Location: index.php?notify=registered");
         }
     }
 }
