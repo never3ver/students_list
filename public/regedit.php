@@ -29,7 +29,7 @@ if (!empty($_POST)) {
         }
     }
 
-    $errors = $validator->validate($student, $oldEmail);
+    $errors = $validator->validate($student);
     if (empty($errors)) {
         if ($authorizer->isAuthorized()) {
             $gateway->updateStudent($student);

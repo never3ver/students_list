@@ -8,7 +8,7 @@ class StudentValidator {
         $this->gateway = $gateway;
     }
 
-    public function validate(Student $student, $oldEmail) {
+    public function validate(Student $student) {
         $errors = [];
 
         if (!preg_match("/^[A-ZА-ЯЁ][a-zA-Zа-яА-ЯЁ\\s'-]{1,45}$/u", $student->name)) {
@@ -23,7 +23,7 @@ class StudentValidator {
         if (!filter_var($student->email, FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = "Адрес электронной почты принимается в формате name@server.com.";
         }
-        if (!$this->gateway->isEmailUnique($student->id, $student->email)) {
+        if (!$this->gateway->isEmailUnique($student->email, $student->id)) {
             $errors['email'] .= " Введенный email уже используется";
         }
         if ((!preg_match("/[0-9]{1,3}/", $student->score)) || $student->score > 300) {
