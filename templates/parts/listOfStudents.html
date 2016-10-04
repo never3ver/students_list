@@ -1,10 +1,10 @@
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th class="column-wide">Имя <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'name', Helper::getOrder($order), $search), ENT_QUOTES) ?>"><?= $sort == 'name' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
-            <th class="column-wide">Фамилия <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'secondname', Helper::getOrder($order), $search), ENT_QUOTES) ?>"><?= $sort == 'secondname' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
-            <th class="column">Номер группы <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'groupname', Helper::getOrder($order), $search), ENT_QUOTES) ?>"><?= $sort == 'groupname' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
-            <th class="column">Баллов <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'score', Helper::getOrder($order), $search), ENT_QUOTES) ?>"><?= $sort == 'score' ? Helper::getSymbol($order) : "&#8661;" ?></a></th>
+            <th class="column-wide">Имя <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'name', Helper::getOrder($order), $search), ENT_QUOTES) ?>"><?= $sort == 'name' ? Helper::getSymbolOfOrder($order) : "&#8661;" ?></a></th>
+            <th class="column-wide">Фамилия <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'secondname', Helper::getOrder($order), $search), ENT_QUOTES) ?>"><?= $sort == 'secondname' ? Helper::getSymbolOfOrder($order) : "&#8661;" ?></a></th>
+            <th class="column">Номер группы <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'groupname', Helper::getOrder($order), $search), ENT_QUOTES) ?>"><?= $sort == 'groupname' ? Helper::getSymbolOfOrder($order) : "&#8661;" ?></a></th>
+            <th class="column">Баллов <a href="<?= htmlspecialchars($pager->getSortedLinkForPage($currentPage, 'score', Helper::getOrder($order), $search), ENT_QUOTES) ?>"><?= $sort == 'score' ? Helper::getSymbolOfOrder($order) : "&#8661;" ?></a></th>
         </tr>
     </thead>
     <tbody>

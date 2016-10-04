@@ -6,10 +6,11 @@ class Helper {
         if (!$word) {
             return htmlspecialchars($text);
         } else {
-            $word = preg_quote($word);
             $word = htmlspecialchars($word, ENT_QUOTES);
             $text = htmlspecialchars($text, ENT_QUOTES);
-            $text = preg_replace("/$word/ui", '<mark>' . $word . '</mark>', $text);
+            if (preg_match("/$word/ui", $text, $matches)) {
+                $text = preg_replace("/$word/ui", '<mark>' . $matches[0] . '</mark>', $text);
+            }
             return $text;
         }
     }
@@ -22,7 +23,7 @@ class Helper {
         }
     }
 
-    public static function getSymbol($order) {
+    public static function getSymbolOfOrder($order) {
         if ($order == 'ASC') {
             return '&dArr;';
         } elseif ($order == 'DESC') {
