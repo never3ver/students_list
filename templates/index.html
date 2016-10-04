@@ -2,7 +2,7 @@
 
 <?php require_once __DIR__ . '/parts/listOfStudents.html' ?>
 
-<?php if (!$authorizer->isAuthorized()): ?>
+<?php if (!$authorizer->isStudentInDatabase()): ?>
 <?php include __DIR__ . '/parts/registerButton.html'; ?>
 <?php else: ?>
 <?php include __DIR__ . '/parts/editButton.html'; ?>

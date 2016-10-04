@@ -18,4 +18,3 @@ if (isset($_COOKIE['name'])) {
 } else {
     $authorizer = new Authorization($gateway, "");
 }
-

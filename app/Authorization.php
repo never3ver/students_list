@@ -10,20 +10,18 @@ class Authorization {
         $this->cookie = trim(strval($cookie));
     }
 
-    public function isAuthorized() {
-        if ($this->cookie == "") {
-            return FALSE;
-        } elseif ($this->gateway->isAbiturientExisting($this->cookie)) {
+    public function isStudentInDatabase() {
+        if ($this->gateway->isAbiturientExisting($this->cookie)) {
             return TRUE;
         } else {
             return FALSE;
         }
     }
 
-    public function retrieveStudent(){
+    public function retrieveStudent() {
         return $this->gateway->getStudent($this->cookie);
     }
-    
+
     protected function generateCookie() {
         $result = null;
         $source = str_split('abcdefghijklmnopqrstuvwxyz'
@@ -36,8 +34,10 @@ class Authorization {
     }
 
     public function logIn(Student $student) {
-        $student->cookie = $this->generateCookie();
-        setcookie('name', $student->cookie, time() + 60 * 60 * 24 * 365 * 10, '/', null, false, true);
+        if (!$student->cookie) {
+            $student->cookie = $this->generateCookie();
+            setcookie('name', $student->cookie, time() + 60 * 60 * 24 * 365 * 10, '/', null, false, true);
+        }
     }
 
 }

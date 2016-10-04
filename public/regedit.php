@@ -5,7 +5,7 @@ require_once __DIR__ . '/../app/init.php';
 $student = new Student();
 $validator = new StudentValidator($gateway);
 
-if ($authorizer->isAuthorized()) {
+if ($authorizer->isStudentInDatabase()) {
     $student = $authorizer->retrieveStudent();
 }
 
@@ -29,13 +29,15 @@ if (!empty($_POST)) {
 
     $errors = $validator->validate($student);
     if (empty($errors)) {
-        if ($authorizer->isAuthorized()) {
+        if ($authorizer->isStudentInDatabase()) {
             $gateway->updateStudent($student);
             header("Location: index.php?notify=edited");
+            exit();
         } else {
             $authorizer->logIn($student);
             $gateway->addStudent($student);
             header("Location: index.php?notify=registered");
+            exit();
         }
     }
 }
