@@ -5,9 +5,13 @@ class Authorization {
     protected $gateway;
     protected $cookie;
 
-    public function __construct(StudentsDataGateway $gateway, $cookie) {
+    public function __construct(StudentsDataGateway $gateway) {
         $this->gateway = $gateway;
-        $this->cookie = trim(strval($cookie));
+        if (isset($_COOKIE['name'])) {
+            $this->cookie = trim(strval($_COOKIE['name']));
+        } else {
+            $this->cookie = "";
+        }
     }
 
     public function isStudentInDatabase() {

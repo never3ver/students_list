@@ -1,5 +1,11 @@
 <?php require_once __DIR__ . '/parts/header.html' ?>
 
+<?php if ($notify == 'registered'): ?>
+<?php include __DIR__ . '/parts/okRegistered.html'; ?>
+<?php elseif ($notify == 'edited'): ?>
+<?php include __DIR__ . '/parts/okEdited.html'; ?>
+<?php endif; ?>
+
 <?php require_once __DIR__ . '/parts/listOfStudents.html' ?>
 
 <?php if (!$authorizer->isStudentInDatabase()): ?>
@@ -12,9 +18,3 @@
 <?php include __DIR__ . '/parts/pagination.html' ?>
 <?php endif; ?>
 <?php require_once __DIR__ . '/parts/footer.html' ?>
-
-<?php if ($notify == 'registered'): ?>
-<?php include __DIR__ . '/parts/okRegistered.html'; ?>
-<?php elseif ($notify == 'edited'): ?>
-<?php include __DIR__ . '/parts/okEdited.html'; ?>
-<?php endif; ?>

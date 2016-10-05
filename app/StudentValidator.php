@@ -14,7 +14,7 @@ class StudentValidator {
         if (!preg_match("/^[A-ZА-ЯЁ][a-zA-Zа-яА-ЯЁ\\s'-]{1,45}$/u", $student->name)) {
             $errors['name'] = "Имя может содержать латинские либо кириллические буквы, апострофы, пробелы и дефисы, первая заглавная, не более 45 символов всего.";
         }
-        if (!preg_match("/^[A-ZА-ЯЁ][a-zA-Zа-яА-ЯЁ\\s'-]{1,45}$/u", $student->secondName)) {
+        if (!preg_match("/^[a-zA-Zа-яА-ЯЁ\\s`'-]{1,45}$/u", $student->secondName)) {
             $errors['secondName'] = "Фамилия может содержать латинские либо кириллические буквы, апострофы, пробелы и дефисы, первая заглавная, не более 45 символов всего.";
         }
         if (!preg_match("/[-А-ЯЁа-яёa-zA-Z0-9]{1,5}/u", $student->groupName)) {
@@ -29,7 +29,7 @@ class StudentValidator {
         if ((!preg_match("/[0-9]{1,3}/", $student->score)) || $student->score > 300) {
             $errors['score'] = "Количество баллов может быть от 0 до 300";
         }
-        if (!preg_match("/[0-9]{4}/", $student->birthYear)) {
+        if (!preg_match("/(19|20)[0-9]{2}/", $student->birthYear)) {
             $errors['birthYear'] = "Год рождения может быть только четырехзначным и содержать только цифры";
         }
         return $errors;
@@ -38,13 +38,17 @@ class StudentValidator {
     public function getNameRegExp() {
         return "^[А-ЯA-ZЁ][а-яёa-z\s-']{1,45}$";
     }
+    
+    public function getSecondNameRegExp() {
+        return "^[A-ZА-Яа-яёa-z\s-`']{1,45}$";
+    }
 
     public function getGroupRegExp() {
         return "[-А-ЯЁа-яёa-zA-Z0-9]{1,5}";
     }
 
     public function getYearRegExp() {
-        return "[0-9]{4}";
+        return "^(19|20)[0-9]{2}";
     }
 
 }

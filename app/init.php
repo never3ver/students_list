@@ -12,9 +12,4 @@ $pdo = new PDO($dsn, $dbUser, $dbPass, $opt);
 require_once __DIR__ . '/../autoload.php';
 
 $gateway = new StudentsDataGateway($pdo);
-
-if (isset($_COOKIE['name'])) {
-    $authorizer = new Authorization($gateway, $_COOKIE['name']);
-} else {
-    $authorizer = new Authorization($gateway, "");
-}
+$authorizer = new Authorization($gateway);

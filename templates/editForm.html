@@ -8,7 +8,7 @@
                    title="Имя может содержать латинские либо кириллические буквы, апострофы, пробелы и дефисы, не более 45 символов всего"
                    value='<?= htmlspecialchars($student->name, ENT_QUOTES) ?>' required="required">
             <?php if (!empty($errors['name'])): ?>
-            <span class = "redtext"><?= $errors['name']; ?></span>
+            <span class = "errortext"><?= $errors['name']; ?></span>
             <?php endif ?>
         </div>
     </div>
@@ -16,11 +16,11 @@
         <label class="col-sm-2 control-label">Фамилия</label>
         <div class="col-sm-10">
             <input class="form-control" type="text" name='secondName'
-                   pattern="<?= htmlspecialchars($validator->getNameRegExp(), ENT_QUOTES) ?>"
+                   pattern="<?= htmlspecialchars($validator->getSecondNameRegExp(), ENT_QUOTES) ?>"
                    title="Фамилия может содержать латинские либо кириллические буквы, апострофы, пробелы и дефисы, не более 45 символов всего"
                    value='<?= htmlspecialchars($student->secondName, ENT_QUOTES) ?>' required="required">
             <?php if (!empty($errors['secondName'])): ?>
-            <span class = "redtext"><?= $errors['secondName']; ?></span>
+            <span class = "errortext"><?= $errors['secondName']; ?></span>
             <?php endif ?>
         </div>
     </div>
@@ -28,11 +28,11 @@
         <label class="col-sm-2 control-label">Пол</label>
         <div class="col-sm-10">
             <label class="radio-inline">
-                <input  type="radio" name ='sex' value='M' required checked='checked'>Мужской
+                <input  type="radio" name ='sex' value="<?=Student::GENDER_MALE?>" required checked='checked'>Мужской
             </label>
             <label class="radio-inline">
-                <input type="radio" name ='sex' value='F' required 
-                       <?= ($student->sex=="F"?'checked="checked"':'');?>>Женский
+                <input type="radio" name ='sex' value="<?=Student::GENDER_FEMALE?>" required 
+                       <?= ($student->sex==Student::GENDER_FEMALE?'checked="checked"':'');?>>Женский
             </label>
         </div>
     </div>
@@ -44,7 +44,7 @@
                    title="Имя группы может содержать не более 5 латинских либо кириллических символов, цифр, дефисов."
                    value='<?= htmlspecialchars($student->groupName, ENT_QUOTES) ?>' required="required">
             <?php if (!empty($errors['groupName'])): ?>
-            <span class = "redtext"><?= $errors['groupName']; ?></span>
+            <span class = "errortext"><?= $errors['groupName']; ?></span>
             <?php endif ?>
         </div>
     </div>
@@ -53,9 +53,9 @@
         <div class="col-sm-10">
             <input class="form-control" type="email" name = 'email'
                    title="Адрес электронной почты принимается в формате name@server.com"
-                   value='<?= htmlspecialchars($student->email, ENT_QUOTES) ?>' required="required">
+                   value='<?= htmlspecialchars($student->email, ENT_QUOTES) ?>' required>
             <?php if (!empty($errors['email'])): ?>
-            <span class = "redtext"><?= $errors['email']; ?></span>
+            <span class = "errortext"><?= $errors['email']; ?></span>
             <?php endif ?>
         </div>
     </div>
@@ -65,9 +65,9 @@
             <input class="form-control" type="number" min='0' max='300' step='1'
                    name = 'score'
                    title="Количество баллов может быть от 0 до 300"
-                   value='<?= htmlspecialchars($student->score, ENT_QUOTES) ?>' required="required">
+                   value='<?= htmlspecialchars($student->score, ENT_QUOTES) ?>' required>
             <?php if (!empty($errors['score'])): ?>
-            <span class = "redtext"><?= $errors['score']; ?></span>
+            <span class = "errortext"><?= $errors['score']; ?></span>
             <?php endif ?>
         </div>
     </div>
@@ -77,9 +77,9 @@
             <input class="form-control" type="text" name = 'birthYear'
                    pattern="<?= htmlspecialchars($validator->getYearRegExp(), ENT_QUOTES) ?>"
                    title="Например 2000"
-                   value='<?= htmlspecialchars($student->birthYear, ENT_QUOTES) ?>' required="required">
+                   value='<?= htmlspecialchars($student->birthYear, ENT_QUOTES) ?>' required>
             <?php if (!empty($errors['birthYear'])): ?>
-            <span class = "redtext"><?= $errors['birthYear']; ?></span>
+            <span class = "errortext"><?= $errors['birthYear']; ?></span>
             <?php endif ?>
         </div>
     </div>
@@ -87,10 +87,10 @@
         <label class="col-sm-2 control-label">Местный</label>
         <div class="col-sm-10">
             <label class="radio-inline">
-                <input type="radio" name ='local' value='Y' required checked="checked">Да
+                <input type="radio" name ='local' value="<?=Student::RESIDENCE_LOCAL?>" required checked="checked">Да
             </label>
             <label class="radio-inline">
-                <input type="radio" name ='local' value='N' required <?=($student->local=="N"?'checked="checked"':'');?>>Нет
+                <input type="radio" name ='local' value="<?=Student::RESIDENCE_NOT_LOCAL?>" required <?=($student->local==Student::RESIDENCE_NOT_LOCAL?'checked="checked"':'');?>>Нет
             </label>
         </div>
     </div>
