@@ -37,7 +37,7 @@ class Authorization {
         return $result;
     }
 
-    public function logIn(Student $student) {
+    public function SignIn(Student $student) {
         if (!$student->cookie) {
             $student->cookie = $this->generateCookie();
             setcookie('name', $student->cookie, time() + 60 * 60 * 24 * 365 * 10, '/', null, false, true);

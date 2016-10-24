@@ -34,7 +34,7 @@ if (!empty($_POST)) {
             header("Location: index.php?notify=edited");
             exit();
         } else {
-            $authorizer->logIn($student);
+            $authorizer->SignIn($student);
             $gateway->addStudent($student);
             header("Location: index.php?notify=registered");
             exit();

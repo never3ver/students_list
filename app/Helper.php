@@ -7,6 +7,7 @@ class Helper {
             return htmlspecialchars($text);
         } else {
             $word = htmlspecialchars($word, ENT_QUOTES);
+            $word = preg_quote($word);
             $text = htmlspecialchars($text, ENT_QUOTES);
             if (preg_match("/$word/ui", $text, $matches)) {
                 $text = preg_replace("/$word/ui", '<mark>' . $matches[0] . '</mark>', $text);

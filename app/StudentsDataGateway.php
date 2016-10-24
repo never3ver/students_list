@@ -41,6 +41,16 @@ class StudentsDataGateway {
         return $studentsTotal;
     }
 
+    public function countFoundStudents($search) {
+        $sql = "SELECT COUNT(*) FROM students WHERE CONCAT(`name`, ' ', `secondName`,"
+                    . " ' ', `groupName`) LIKE :search";
+        $pdoStatement = $this->pdo->prepare($sql);
+        $pdoStatement->bindValue(":search", "%" . $search . "%");
+        $pdoStatement->execute();
+        $studentsTotal = $pdoStatement->fetchColumn();
+        return $studentsTotal;
+    }
+
     public function updateStudent(Student $student) {
         $pdoStatement = $this->pdo->prepare("UPDATE students SET `name` = :name,"
                 . " `secondName` = :secondName, `sex` = :sex, `groupName` = :groupName,"
