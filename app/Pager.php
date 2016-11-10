@@ -47,4 +47,36 @@ class Pager {
         return $pageNumber * $this->recordsPerPage - $this->recordsPerPage;
     }
 
+    public function getBackwardLink($currentPage, $sort, $order, $search) {
+        if ($currentPage == 1) {
+            return "<li class='disabled'><span>&laquo;</span></li>";
+        } else {
+            return "<li><a href='{$this->getSortedLinkForPage($currentPage - 1, $sort, $order, $search)}'>&laquo;</a></li>";
+        }
+    }
+
+    public function getNumbersLinks($currentPage, $sort, $order, $search) {
+        $link = '';
+        for ($i = 1; $i < $this->getTotalPages(); $i++) {
+            if ($i == 1 && $currentPage == 1) {
+                $link .= "<li class='active'><span>1</span></li>";
+            } elseif ($i == $this->getTotalPages() && $currentPage == $this->getTotalPages()) {
+                $link .= "<li class='active'><span>{$this->getTotalPages()}</span></li>";
+            } elseif ($i == $currentPage) {
+                $link .= "<li class='active'><a href='{$this->getSortedLinkForPage($i, $sort, $order, $search)}'>{$i}</a></li>";
+            } else {
+                $link .= "<li><a href='{$this->getSortedLinkForPage($i, $sort, $order, $search)}'>{$i}</a></li>";
+            }
+        }
+        return $link;
+    }
+
+    public function getForwardLink($currentPage, $sort, $order, $search) {
+        if ($currentPage == $this->getTotalPages()) {
+            return "<li class='disabled'><span>&raquo;</span></li>";
+        } else {
+            return "<li><a href='{$this->getSortedLinkForPage($currentPage + 1, $sort, $order, $search)}'>&raquo;</a></li>";
+        }
+    }
+
 }

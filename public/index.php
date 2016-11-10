@@ -23,7 +23,7 @@ if (!isset($_GET['search']) || $_GET['search'] === "") {
 }
 
 //quantity of records per page is set here
-$recordsPerPage = 50;
+$recordsPerPage = 2;
 
 $pager = new Pager($totalRecords, $recordsPerPage, "index.php?page=");
 $limit = $pager->getLimit($currentPage);
