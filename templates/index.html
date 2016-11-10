@@ -6,7 +6,16 @@
 <?php include __DIR__ . '/parts/okEdited.html'; ?>
 <?php endif; ?>
 
+
+<?php if (isset($_GET['search'])): ?>
+<?php include __DIR__ . '/parts/results.html'; ?>
+<?php endif; ?>
+<?php if (!$pageList): ?>
+<?php include __DIR__ . '/parts/noStudents.html'; ?>
+<?php else: ?>
 <?php require_once __DIR__ . '/parts/listOfStudents.html' ?>
+<?php endif; ?>
+
 
 <?php if (!$authorizer->isStudentInDatabase()): ?>
 <?php include __DIR__ . '/parts/registerButton.html'; ?>

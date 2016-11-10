@@ -43,7 +43,7 @@ class StudentsDataGateway {
 
     public function countFoundStudents($search) {
         $sql = "SELECT COUNT(*) FROM students WHERE CONCAT(`name`, ' ', `secondName`,"
-                    . " ' ', `groupName`) LIKE :search";
+                . " ' ', `groupName`) LIKE :search";
         $pdoStatement = $this->pdo->prepare($sql);
         $pdoStatement->bindValue(":search", "%" . $search . "%");
         $pdoStatement->execute();
@@ -74,11 +74,12 @@ class StudentsDataGateway {
         $pdoStatement->bindValue(":id", $id);
         $pdoStatement->execute();
         $result = $pdoStatement->fetchColumn();
-        if ($result > 0) {
-            return FALSE;
-        } else {
-            return TRUE;
-        }
+//        if ($result > 0) {
+//            return FALSE;
+//        } else {
+//            return TRUE;
+//        }
+        return $result == 0;
     }
 
     public function getStudents($search, $limit, $offset, $sort, $order) {

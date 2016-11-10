@@ -29,13 +29,13 @@ if (!empty($_POST)) {
 
     $errors = $validator->validate($student);
     if (empty($errors)) {
-        if ($authorizer->isStudentInDatabase()) {
+        if ($student->id) {
             $gateway->updateStudent($student);
             header("Location: index.php?notify=edited");
             exit();
         } else {
-            $authorizer->SignIn($student);
             $gateway->addStudent($student);
+            $authorizer->SignIn($student);
             header("Location: index.php?notify=registered");
             exit();
         }

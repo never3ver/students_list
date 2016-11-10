@@ -28,7 +28,8 @@
         <label class="col-sm-2 control-label">Пол</label>
         <div class="col-sm-10">
             <label class="radio-inline">
-                <input  type="radio" name ='sex' value="<?=Student::GENDER_MALE?>" required checked='checked'>Мужской
+                <input  type="radio" name ='sex' value="<?=Student::GENDER_MALE?>" required 
+                        <?= ($student->sex==Student::GENDER_MALE?'checked="checked"':'');?>>Мужской
             </label>
             <label class="radio-inline">
                 <input type="radio" name ='sex' value="<?=Student::GENDER_FEMALE?>" required 
@@ -51,7 +52,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">Email</label>
         <div class="col-sm-10">
-            <input class="form-control" type="email" name = 'email'
+            <input class="form-control" type="email" name = "email"
                    title="Адрес электронной почты принимается в формате name@server.com"
                    value='<?= htmlspecialchars($student->email, ENT_QUOTES) ?>' required>
             <?php if (!empty($errors['email'])): ?>
@@ -62,7 +63,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">Баллов</label>
         <div class="col-sm-10">
-            <input class="form-control" type="number" min='0' max='300' step='1'
+            <input class="form-control" type="number" min="0" max="300" step="1"
                    name = 'score'
                    title="Количество баллов может быть от 0 до 300"
                    value='<?= htmlspecialchars($student->score, ENT_QUOTES) ?>' required>
@@ -74,7 +75,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">Год рождения</label>
         <div class="col-sm-10">
-            <input class="form-control" type="text" name = 'birthYear'
+            <input class="form-control" type="number" min="1901" max="2155" step="1" name = "birthYear"
                    pattern="<?= htmlspecialchars($validator->getYearRegExp(), ENT_QUOTES) ?>"
                    title="Например 2000"
                    value='<?= htmlspecialchars($student->birthYear, ENT_QUOTES) ?>' required>
@@ -87,10 +88,12 @@
         <label class="col-sm-2 control-label">Местный</label>
         <div class="col-sm-10">
             <label class="radio-inline">
-                <input type="radio" name ='local' value="<?=Student::RESIDENCE_LOCAL?>" required checked="checked">Да
+                <input type="radio" name ='local' value="<?=Student::RESIDENCE_LOCAL?>" required 
+                       <?=($student->local==Student::RESIDENCE_LOCAL?'checked="checked"':'');?>>Да
             </label>
             <label class="radio-inline">
-                <input type="radio" name ='local' value="<?=Student::RESIDENCE_NOT_LOCAL?>" required <?=($student->local==Student::RESIDENCE_NOT_LOCAL?'checked="checked"':'');?>>Нет
+                <input type="radio" name ='local' value="<?=Student::RESIDENCE_NOT_LOCAL?>" required 
+                       <?=($student->local==Student::RESIDENCE_NOT_LOCAL?'checked="checked"':'');?>>Нет
             </label>
         </div>
     </div>
