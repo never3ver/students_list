@@ -1,43 +1,9 @@
 <footer class="footer">
     <div class="container">
         <ul class="pagination">
-
-            <!--            for backward button
-                        <?php if ($currentPage == 1): ?>
-                        <li class="disabled"><span>&laquo;</span></li>
-                        <?php else: ?>
-                        <li><a href="<?= $pager->getSortedLinkForPage($currentPage - 1, $sort, $order, $search) ?>">&laquo;</a></li>
-                        <?php endif; ?>
-            
-                        for numbered buttons
-                        <?php for ($i = 1; $i<=$pager->getTotalPages(); $i++): ?>                     
-            
-                        <?php if ($i == 1 && $currentPage == 1): ?>
-                        <li class="active"><span>1</span></li>
-            
-                        <?php elseif ($i == $pager->getTotalPages() && $currentPage == $pager->getTotalPages()): ?>
-                        <li class="active"><span><?= $pager->getTotalPages() ?></span></li>
-            
-                        <?php elseif ($i == $currentPage): ?>
-                        <li class="active"><a href="<?= $pager->getSortedLinkForPage($i, $sort, $order, $search) ?>"><?= $i ?></a></li>
-            
-                        <?php else: ?>
-                        <li><a href="<?= $pager->getSortedLinkForPage($i, $sort, $order, $search) ?>"><?= $i ?></a></li>
-                        <?php endif; ?>            
-            
-                        <?php endfor; ?>
-            
-                        for forward button
-                        <?php if ($currentPage == $pager->getTotalPages()): ?>
-                        <li class="disabled"><span>&raquo;</span></li>
-                        <?php else: ?>
-                        <li><a href="<?= $pager->getSortedLinkForPage($currentPage + 1, $sort, $order, $search) ?>">&raquo;</a></li>
-                        <?php endif; ?>-->
-
             <?= $pager->getBackwardLink($currentPage, $sort, $order, $search); ?>
             <?= $pager->getNumbersLinks($currentPage, $sort, $order, $search); ?>
             <?= $pager->getForwardLink($currentPage, $sort, $order, $search); ?>
-
         </ul>
     </div>
 </footer>
