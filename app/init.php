@@ -9,8 +9,6 @@ $opt = [
 ];
 $pdo = new PDO($dsn, $dbUser, $dbPass, $opt);
 
-//require_once __DIR__ . '/../autoload.php';
-
 spl_autoload_register(function ($pClassName) {
     $path = __DIR__ . "/" . $pClassName . ".php";
     if (file_exists($path)) {
