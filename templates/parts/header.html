@@ -18,7 +18,7 @@
                         <form class="navbar-form navbar-right" action="index.php" method="get">
                             <div class="form-group">
                                 <input type="text" name="search" 
-                                       placeholder=<?=Helper::getPlaceholder();?>
+                                       value="<?= isset($search) ? htmlspecialchars($search) : '' ?>"
                                        class="form-control" autocomplete="on" required>
                             </div>
                             <button type="submit" class="btn btn-success">Найти</button>

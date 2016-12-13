@@ -34,8 +34,9 @@ if (!empty($_POST)) {
             header("Location: index.php?notify=edited");
             exit();
         } else {
+            $student->cookie = $authorizer->generateCookie();
             $gateway->addStudent($student);
-            $authorizer->SignIn($student);
+            $authorizer->signIn($student);
             header("Location: index.php?notify=registered");
             exit();
         }

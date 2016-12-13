@@ -69,9 +69,14 @@ class StudentsDataGateway {
     }
 
     public function isEmailUnique($email, $id) {
-        $pdoStatement = $this->pdo->prepare("SELECT COUNT(*) FROM students WHERE email = :email AND id != :id");
-        $pdoStatement->bindValue(":email", $email);
-        $pdoStatement->bindValue(":id", $id);
+        if ($id) {
+            $pdoStatement = $this->pdo->prepare("SELECT COUNT(*) FROM students WHERE email = :email AND id != :id");
+            $pdoStatement->bindValue(":email", $email);
+            $pdoStatement->bindValue(":id", $id);
+        } else {
+            $pdoStatement = $this->pdo->prepare("SELECT COUNT(*) FROM students WHERE email = :email");
+            $pdoStatement->bindValue(":email", $email);
+        }
         $pdoStatement->execute();
         $result = $pdoStatement->fetchColumn();
 //        if ($result > 0) {
@@ -79,6 +84,7 @@ class StudentsDataGateway {
 //        } else {
 //            return TRUE;
 //        }
+        var_dump($result);
         return $result == 0;
     }
 
@@ -111,13 +117,15 @@ class StudentsDataGateway {
     }
 
     public function isAbiturientExisting($cookie) {
-        $sql = "SELECT COUNT(*) FROM students WHERE cookie = :cookie";
-        $pdoStatement = $this->pdo->prepare($sql);
-        $pdoStatement->bindValue(":cookie", $cookie);
-        $pdoStatement->execute();
-        $result = $pdoStatement->fetchColumn();
-        if ($result > 0) {
-            return TRUE;
+        if ($cookie) {
+            $sql = "SELECT COUNT(*) FROM students WHERE cookie = :cookie";
+            $pdoStatement = $this->pdo->prepare($sql);
+            $pdoStatement->bindValue(":cookie", $cookie);
+            $pdoStatement->execute();
+            $result = $pdoStatement->fetchColumn();
+            if ($result > 0) {
+                return TRUE;
+            }
         }
         return FALSE;
     }

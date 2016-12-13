@@ -7,12 +7,15 @@
 <?php endif; ?>
 
 
-<?php if (isset($_GET['search']) && $_GET['search'] != ''): ?>
+<?php if ($search): ?>
 <?php include __DIR__ . '/parts/results.html'; ?>
 <?php endif; ?>
-<?php if (!$pageList): ?>
-<?php include __DIR__ . '/parts/noStudents.html'; ?>
+<?php if (!$pageList && $search === ''): ?>
+<?php include __DIR__ . '/parts/beTheFirst.html'; ?>
 <?php else: ?>
+<?php if (!$pageList && $search != ''): ?>
+<?php include __DIR__ . '/parts/noStudents.html'; ?>
+<?php endif; ?>
 <?php require_once __DIR__ . '/parts/listOfStudents.html' ?>
 <?php endif; ?>
 

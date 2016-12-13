@@ -34,11 +34,4 @@ class Helper {
         }
     }
 
-    public static function getPlaceholder() {
-        if (isset($_GET['search']) && $_GET['search'] != '') {
-            return htmlspecialchars(trim(strval($_GET['search'])));
-        }
-        return "Поиск";
-    }
-
 }
