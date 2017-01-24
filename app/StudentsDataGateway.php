@@ -79,12 +79,6 @@ class StudentsDataGateway {
         }
         $pdoStatement->execute();
         $result = $pdoStatement->fetchColumn();
-//        if ($result > 0) {
-//            return FALSE;
-//        } else {
-//            return TRUE;
-//        }
-        var_dump($result);
         return $result == 0;
     }
 

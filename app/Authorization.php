@@ -3,7 +3,7 @@
 class Authorization {
 
     protected $gateway;
-    public $cookie;
+    protected $cookie;
 
     public function __construct(StudentsDataGateway $gateway) {
         $this->gateway = $gateway;
